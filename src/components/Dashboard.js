@@ -1,8 +1,11 @@
 // src/components/Dashboard.js
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { format, subDays } from 'date-fns';
+import { format, subDays, parseISO } from 'date-fns';
 import { tr } from 'date-fns/locale';
+import ProgressBar from './ProgressBar';
+import ProgressChart from './ProgressChart';
+import FilterPanel from './FilterPanel';
 
 const Dashboard = ({ supabase }) => {
   const [weightData, setWeightData] = useState([]);
@@ -13,8 +16,12 @@ const Dashboard = ({ supabase }) => {
     totalLoss: 0,
     daysLeft: 0,
     dailyTarget: 0,
-    targetWeight: 99 // Varsayılan hedef kilo
+    targetWeight: 99,
+    startDate: null,
+    targetDate: null,
+    progressPercentage: 0
   });
+  const [chartFilter, setChartFilter] = useState('month'); // 'week', 'month', 'all'
 
   useEffect(() => {
     // Tüm verileri sırayla yükle
@@ -58,7 +65,9 @@ const Dashboard = ({ supabase }) => {
           // Hedef tarihe kalan gün sayısını hesapla
           const today = new Date();
           const targetDate = new Date(profileData.target_date);
+          const startDate = new Date(weightEntries[0].date);
           const daysLeft = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+          const totalDays = Math.ceil((targetDate - startDate) / (1000 * 60 * 60 * 24));
           
           // Kilo bilgilerini al
           const startWeight = weightEntries[0].weight;
@@ -73,7 +82,17 @@ const Dashboard = ({ supabase }) => {
           const dailyTarget = (daysLeft > 0 && remainingToLose > 0) 
             ? (remainingToLose / daysLeft).toFixed(2) 
             : 0;
-            
+          
+          // İlerleme yüzdesini hesapla
+          const totalWeightToLose = startWeight - targetWeight;
+          const progressPercentage = Math.min(
+            100, 
+            Math.max(
+              0,
+              Math.round((totalLoss / totalWeightToLose) * 100)
+            )
+          );
+          
           // Verileri güncelle
           setWeightData(weightEntries);
           setStats({
@@ -82,17 +101,10 @@ const Dashboard = ({ supabase }) => {
             totalLoss,
             daysLeft: Math.max(0, daysLeft),
             dailyTarget,
-            targetWeight
-          });
-          
-          console.log("Hesaplanan değerler:", {
-            startWeight,
-            currentWeight,
-            totalLoss,
-            daysLeft: Math.max(0, daysLeft),
-            remainingToLose,
-            dailyTarget,
-            targetWeight
+            targetWeight,
+            startDate: weightEntries[0].date,
+            targetDate: profileData.target_date,
+            progressPercentage
           });
         } else if (weightEntries && weightEntries.length > 0) {
           // Sadece kilo verisi varsa
@@ -105,7 +117,8 @@ const Dashboard = ({ supabase }) => {
             ...prev,
             startWeight,
             currentWeight,
-            totalLoss
+            totalLoss,
+            startDate: weightEntries[0].date
           }));
         } else if (profileData) {
           // Sadece profil verisi varsa
@@ -116,7 +129,8 @@ const Dashboard = ({ supabase }) => {
           setStats(prev => ({
             ...prev,
             daysLeft: Math.max(0, daysLeft),
-            targetWeight: profileData.target_weight || 99
+            targetWeight: profileData.target_weight || 99,
+            targetDate: profileData.target_date
           }));
         }
       } catch (error) {
@@ -129,7 +143,7 @@ const Dashboard = ({ supabase }) => {
     loadAllData();
   }, [supabase]);
 
-  // Son 30 günün verisini gösterir
+  // Son 30 günün verisini gösterir (eski fonksiyon, referans için tutuldu)
   const getChartData = () => {
     if (weightData.length === 0) return [];
     
@@ -154,6 +168,16 @@ const Dashboard = ({ supabase }) => {
   return (
     <div className="dashboard">
       <h2>Gösterge Paneli</h2>
+      
+      {/* İlerleme Çubuğu */}
+      <div className="progress-section">
+        <h3>Hedefe İlerleme</h3>
+        <ProgressBar 
+          percentage={stats.progressPercentage} 
+          label="Toplam İlerleme" 
+          color="#27ae60"
+        />
+      </div>
       
       <div className="stats-grid">
         <div className="stat-card">
@@ -183,32 +207,23 @@ const Dashboard = ({ supabase }) => {
       </div>
 
       <div className="chart-container">
-        <h3>Kilo Takibi</h3>
+        <div className="chart-header">
+          <h3>Kilo Takibi</h3>
+          <FilterPanel 
+            currentFilter={chartFilter}
+            onFilterChange={setChartFilter}
+          />
+        </div>
+        
         {weightData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={getChartData()}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="date" 
-                tickFormatter={(date) => format(new Date(date), 'd MMM', { locale: tr })} 
-              />
-              <YAxis domain={['dataMin - 1', 'dataMax + 1']} />
-              <Tooltip 
-                formatter={(value) => [`${value} kg`, 'Kilo']}
-                labelFormatter={(date) => format(new Date(date), 'd MMMM yyyy', { locale: tr })}
-              />
-              <Legend />
-              <Line 
-                type="monotone" 
-                dataKey="weight" 
-                stroke="#8884d8" 
-                name="Kilo" 
-                strokeWidth={2}
-                dot={{ r: 4 }}
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          <ProgressChart 
+            weightData={weightData}
+            targetWeight={stats.targetWeight}
+            startDate={stats.startDate}
+            targetDate={stats.targetDate}
+            startWeight={stats.startWeight}
+            filterPeriod={chartFilter}
+          />
         ) : (
           <p>Henüz kilo kaydı bulunmuyor. Kilo kaydı eklemek için "Kilo Takibi" sayfasını ziyaret edin.</p>
         )}
@@ -216,10 +231,16 @@ const Dashboard = ({ supabase }) => {
 
       <div className="motivation">
         <h3>Motivasyon</h3>
-        {stats.daysLeft > 0 && parseFloat(stats.dailyTarget) > 0 ? (
-          <p>Hedefine ulaşmak için her gün yaklaşık {stats.dailyTarget} kg vermelisin. Sen yapabilirsin!</p>
+        {stats.progressPercentage > 0 ? (
+          <p>
+            Tebrikler! Hedefinize ulaşmak için %{stats.progressPercentage} yol kat ettiniz.
+            {stats.daysLeft > 0 && parseFloat(stats.dailyTarget) > 0 ? 
+              ` Hedefe ulaşmak için her gün yaklaşık ${stats.dailyTarget} kg vermelisiniz.` : 
+              ''
+            } Harika gidiyorsunuz!
+          </p>
         ) : (
-          <p>Hedefe ulaşmak için profil sayfasında hedef tarih ve kilo bilgilerini güncelleyebilirsin.</p>
+          <p>Hedefe ulaşmak için profil sayfasında hedef tarih ve kilo bilgilerini güncelleyebilirsiniz.</p>
         )}
       </div>
     </div>

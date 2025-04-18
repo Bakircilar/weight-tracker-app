@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { format, startOfWeek, addDays } from 'date-fns';
 import { tr } from 'date-fns/locale';
+import MealFoodManager from './MealFoodManager';
 
 const MealPlanner = ({ supabase }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -9,6 +10,8 @@ const MealPlanner = ({ supabase }) => {
   const [mealPlan, setMealPlan] = useState({});
   const [loading, setLoading] = useState(true);
   const [completedMeals, setCompletedMeals] = useState({});
+  const [foodData, setFoodData] = useState({});
+  const [editingMeal, setEditingMeal] = useState(null);
 
   // Haftanın günleri
   const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
@@ -20,6 +23,7 @@ const MealPlanner = ({ supabase }) => {
     generateWeekDays(currentDate);
     fetchMealPlan();
     fetchCompletedMeals();
+    fetchFoodData();
   }, [currentDate]);
 
   // Haftanın günlerini oluştur
@@ -97,6 +101,32 @@ const MealPlanner = ({ supabase }) => {
     }
   };
 
+  // Öğünlere ait yiyecek verilerini getir
+  const fetchFoodData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('food_items')
+        .select('*');
+        
+      if (error) throw error;
+      
+      // Verileri öğün kimliğine göre düzenle
+      const foodsByMeal = {};
+      
+      data.forEach(item => {
+        if (!foodsByMeal[item.meal_plan_id]) {
+          foodsByMeal[item.meal_plan_id] = [];
+        }
+        
+        foodsByMeal[item.meal_plan_id].push(item);
+      });
+      
+      setFoodData(foodsByMeal);
+    } catch (error) {
+      console.error('Yiyecek verisi çekme hatası:', error);
+    }
+  };
+
   // Öğünü tamamlandı/tamamlanmadı olarak işaretle
   const toggleMealCompletion = async (date, mealType, isCompleted) => {
     const dateStr = format(date, 'yyyy-MM-dd');
@@ -160,6 +190,57 @@ const MealPlanner = ({ supabase }) => {
     setCurrentDate(new Date());
   };
 
+  // Yiyecek editörünü aç
+  const openFoodEditor = (mealId) => {
+    setEditingMeal(mealId);
+  };
+
+  // Yiyecek düzenleme işlemini tamamla
+  const handleFoodSave = async (mealId, data) => {
+    try {
+      // Öğünün toplam kalorisini güncelle
+      await supabase
+        .from('meal_plans')
+        .update({ 
+          calories: data.totalCalories,
+          description: `${data.foodCount} yiyecek (${data.totalCalories} kcal)`
+        })
+        .eq('id', mealId);
+        
+      // Verileri yeniden yükle
+      fetchMealPlan();
+      fetchFoodData();
+      
+      // Düzenleme modunu kapat
+      setEditingMeal(null);
+    } catch (error) {
+      console.error('Öğün güncelleme hatası:', error);
+    }
+  };
+
+  // Öğünün yiyeceklerini görüntüle
+  const renderFoodItems = (mealId) => {
+    const foods = foodData[mealId] || [];
+    
+    if (foods.length === 0) {
+      return <p className="no-foods">Yiyecek eklenmemiş</p>;
+    }
+    
+    return (
+      <div className="food-items-list">
+        <h5>Yiyecekler:</h5>
+        <ul>
+          {foods.map(food => (
+            <li key={food.id} className="food-item-small">
+              <span className="food-name">{food.food_name}</span>
+              <span className="food-calories">{food.calories} kcal</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
@@ -174,55 +255,81 @@ const MealPlanner = ({ supabase }) => {
         <button onClick={nextWeek}>Sonraki Hafta &gt;</button>
       </div>
       
-      <div className="week-view">
-        {weekDays.map((date, index) => (
-          <div 
-            key={index} 
-            className={`day-card ${format(date, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd') ? 'today' : ''}`}
-          >
-            <div className="day-header">
-              <h3>{days[index]}</h3>
-              <span>{format(date, 'd MMMM', { locale: tr })}</span>
-            </div>
-            
-            <div className="meals">
-              {mealTypes.map(mealType => {
-                const dayName = days[index];
-                const meal = mealPlan[dayName] && mealPlan[dayName][mealType];
-                const completed = isMealCompleted(date, mealType);
-                
-                return (
-                  <div key={mealType} className={`meal ${completed ? 'completed' : ''}`}>
-                    <div className="meal-header">
-                      <h4>{mealType}</h4>
-                      {meal && <span>{meal.calories} kcal</span>}
-                    </div>
-                    
-                    {meal ? (
-                      <>
-                        <p className="meal-title">{meal.title}</p>
-                        <p className="meal-description">{meal.description}</p>
-                        
-                        <label className="checkbox-container">
-                          <input 
-                            type="checkbox" 
-                            checked={completed}
-                            onChange={() => toggleMealCompletion(date, mealType, completed)}
-                          />
-                          <span className="checkmark"></span>
-                          Tamamlandı
-                        </label>
-                      </>
-                    ) : (
-                      <p className="no-meal">Bu gün için öğün tanımlanmamış.</p>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+      {editingMeal ? (
+        <div className="meal-editor-overlay">
+          <div className="meal-editor-container">
+            <MealFoodManager 
+              supabase={supabase} 
+              mealPlanId={editingMeal} 
+              maxCalories={mealPlan[days[0]]?.Kahvaltı?.calories || 500}
+              onSave={(data) => handleFoodSave(editingMeal, data)}
+              onCancel={() => setEditingMeal(null)}
+            />
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="week-view">
+          {weekDays.map((date, index) => (
+            <div 
+              key={index} 
+              className={`day-card ${format(date, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd') ? 'today' : ''}`}
+            >
+              <div className="day-header">
+                <h3>{days[index]}</h3>
+                <span>{format(date, 'd MMMM', { locale: tr })}</span>
+              </div>
+              
+              <div className="meals">
+                {mealTypes.map(mealType => {
+                  const dayName = days[index];
+                  const meal = mealPlan[dayName] && mealPlan[dayName][mealType];
+                  const completed = isMealCompleted(date, mealType);
+                  
+                  return (
+                    <div key={mealType} className={`meal ${completed ? 'completed' : ''}`}>
+                      <div className="meal-header">
+                        <h4>{mealType}</h4>
+                        {meal && <span>{meal.calories} kcal</span>}
+                      </div>
+                      
+                      {meal ? (
+                        <>
+                          <p className="meal-title">{meal.title}</p>
+                          <p className="meal-description">{meal.description}</p>
+                          
+                          {/* Yiyecek listesi */}
+                          {renderFoodItems(meal.id)}
+                          
+                          <div className="meal-actions">
+                            <button 
+                              className="btn-sm btn-primary edit-foods-btn"
+                              onClick={() => openFoodEditor(meal.id)}
+                            >
+                              Yiyecekleri Düzenle
+                            </button>
+                            
+                            <label className="checkbox-container">
+                              <input 
+                                type="checkbox" 
+                                checked={completed}
+                                onChange={() => toggleMealCompletion(date, mealType, completed)}
+                              />
+                              <span className="checkmark"></span>
+                              Tamamlandı
+                            </label>
+                          </div>
+                        </>
+                      ) : (
+                        <p className="no-meal">Bu gün için öğün tanımlanmamış.</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
