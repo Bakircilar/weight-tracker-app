@@ -1,0 +1,1915 @@
+/* src/components/enhancedStyles.css */
+
+/* Metabolik Hız Hesaplayıcı Stilleri */
+.metabolic-calculator {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .calculator-form {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+    }
+  }
+  
+  .calculator-results {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .result-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+  }
+  
+  .result-card h4 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  
+  .result-value {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #343a40;
+    display: block;
+    margin: 0.5rem 0;
+  }
+  
+  .result-desc {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin: 0;
+  }
+  
+  .result-card.highlight {
+    background-color: #e3f2fd;
+    border-color: #2196f3;
+  }
+  
+  .result-card.highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #2196f3;
+  }
+  
+  .custom-target-input {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0.5rem 0 1rem;
+  }
+  
+  .custom-target-input input {
+    width: 100px;
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .calculator-projections {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .calculator-projections h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #343a40;
+  }
+  
+  .projection-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .projection-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
+  .projection-label {
+    font-weight: 500;
+    color: #495057;
+  }
+  
+  .projection-value {
+    font-weight: 600;
+    color: #212529;
+  }
+  
+  .calorie-distribution {
+    margin-top: 1.5rem;
+  }
+  
+  .calorie-distribution h5 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #495057;
+  }
+  
+  .distribution-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .meal-distrib {
+    display: flex;
+    align-items: center;
+  }
+  
+  .meal-name {
+    width: 80px;
+    font-weight: 500;
+    color: #495057;
+  }
+  
+  .distrib-bar {
+    flex: 1;
+    height: 24px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .distrib-fill {
+    height: 100%;
+    background-color: #2196f3;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .distrib-value {
+    position: absolute;
+    right: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #495057;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .calculator-actions {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  /* Beslenme Ayarları Stilleri */
+  .nutrition-settings {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .settings-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .settings-tabs button {
+    padding: 0.75rem 1.25rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.2s;
+  }
+  
+  .settings-tabs button.active {
+    background-color: #e3f2fd;
+    color: #2196f3;
+    border-color: #2196f3;
+  }
+  
+  .settings-desc {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+  }
+  
+  .calorie-distribution-preview, .macro-targets-preview {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .calorie-preview-bar, .macro-preview-bar {
+    height: 40px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .meal-segment, .macro-segment {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  
+  .meal-breakfast {
+    background-color: #4caf50;
+  }
+  
+  .meal-lunch {
+    background-color: #2196f3;
+  }
+  
+  .meal-dinner {
+    background-color: #9c27b0;
+  }
+  
+  .meal-snacks {
+    background-color: #ff9800;
+  }
+  
+  .macro-segment.protein {
+    background-color: #4caf50;
+  }
+  
+  .macro-segment.carbs {
+    background-color: #2196f3;
+  }
+  
+  .macro-segment.fat {
+    background-color: #ff9800;
+  }
+  
+  .calorie-preview-values, .macro-daily-values {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .calorie-preview-values span, .macro-value {
+    background-color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #495057;
+    border: 1px solid #e9ecef;
+  }
+  
+  .distribution-form, .macro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .distribution-inputs, .macro-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .distribution-total, .macro-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+  
+  .total-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .total-value.valid {
+    color: #4caf50;
+  }
+  
+  .total-value.invalid {
+    color: #f44336;
+  }
+  
+  .macro-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .macro-presets button {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .macro-presets button:hover {
+    background-color: #e9ecef;
+  }
+  
+  .settings-actions {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  /* İlerleme Fotoğrafları Stilleri */
+  .progress-photos-container {
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .photo-upload-section {
+    margin-bottom: 2rem;
+  }
+  
+  .upload-form {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .form-left {
+    flex: 2;
+  }
+  
+  .form-right {
+    flex: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .upload-form {
+      flex-direction: column;
+    }
+  }
+  
+  .photo-preview {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    background-color: #f8f9fa;
+  }
+  
+  .photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .no-preview {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    color: #6c757d;
+  }
+  
+  .gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .selection-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .photo-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .photo-card.selected {
+    border: 3px solid #2196f3;
+  }
+  
+  .photo-card-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .photo-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .selection-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #2196f3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .photo-card-footer {
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .photo-date {
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .photo-weight {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+  }
+  
+  .photo-note {
+    padding: 0.5rem 0.75rem;
+    background-color: #f9f9f9;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .photo-compare-view {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .compare-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .comparison-info {
+    margin-bottom: 1.5rem;
+  }
+  
+  .comparison-dates {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .date-tag {
+    background-color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .date-tag.older {
+    color: #e74c3c;
+  }
+  
+  .date-tag.newer {
+    color: #2ecc71;
+  }
+  
+  .weight-tag {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+  
+  .comparison-progress {
+    text-align: center;
+    font-weight: 500;
+    color: #7f8c8d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .weight-change {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+  
+  .weight-change.positive {
+    color: #2ecc71;
+  }
+  
+  .weight-change.negative {
+    color: #e74c3c;
+  }
+  
+  .comparison-photos {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .comparison-photo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .comparison-photo img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  /* Toplu Öğün Planlama Stilleri */
+  .bulk-meal-planner {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .planner-options {
+    margin-bottom: 1.5rem;
+  }
+  
+  .hint-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+    font-style: italic;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .calorie-settings {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .distribution-preview {
+    margin-top: 1rem;
+  }
+  
+  .preview-bar {
+    height: 30px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+  
+  .segment {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  
+  .segment.breakfast {
+    background-color: #4caf50;
+  }
+  
+  .segment.lunch {
+    background-color: #2196f3;
+  }
+  
+  .segment.dinner {
+    background-color: #9c27b0;
+  }
+  
+  .segment.snacks {
+    background-color: #ff9800;
+  }
+  
+  .preview-labels {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  
+  .day-selection {
+    margin-bottom: 1.5rem;
+  }
+  
+  .day-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .day-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .day-toggle input {
+    margin: 0;
+  }
+  
+  .day-toggle.active {
+    background-color: #e3f2fd;
+    border-color: #2196f3;
+  }
+  
+  .day-select-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .day-select-actions button {
+    background-color: transparent;
+    border: none;
+    color: #2196f3;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+    text-decoration: underline;
+  }
+  
+  .matrix-container {
+    overflow-x: auto;
+  }
+  
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+  }
+  
+  .matrix-table th, .matrix-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .matrix-table th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    color: #495057;
+  }
+  
+  .day-cell {
+    font-weight: 500;
+    width: 100px;
+  }
+  
+  .matrix-table tr.disabled {
+    opacity: 0.5;
+  }
+  
+  .meal-cell {
+    width: 140px;
+  }
+  
+  .meal-toggle {
+    margin-bottom: 0.5rem;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196f3;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+  
+  .meal-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  
+  .meal-calories {
+    font-weight: 500;
+    color: #212529;
+  }
+  
+  .summary {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .summary-content {
+    margin-top: 1rem;
+  }
+  
+  .summary-content p {
+    margin: 0.5rem 0;
+  }
+  
+  .planner-actions {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  /* Kilo Kaybı Karşılaştırmaları Stilleri */
+  .weight-loss-comparisons {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .total-weight-lost {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .weight-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2196f3;
+    display: block;
+  }
+  
+  .weight-label {
+    font-size: 1.1rem;
+    color: #6c757d;
+  }
+  
+  .motivation-section {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-left: 4px solid #4caf50;
+  }
+  
+  .motivation-message {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #2c3e50;
+    margin: 0;
+  }
+  
+  .comparisons-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .comparison-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .comparison-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .comparison-text {
+    margin: 0 0 0.5rem 0;
+    line-height: 1.5;
+  }
+  
+  .highlight {
+    color: #2196f3;
+    font-weight: 600;
+  }
+  
+  .total-text {
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: right;
+    margin: 0.5rem 0 0 0;
+  }
+  
+  .calorie-facts {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .fact-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .fact-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .fact-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2196f3;
+    margin-bottom: 0.5rem;
+  }
+  
+  .fact-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  .health-benefits {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  
+  .benefits-list {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    border-left: 3px solid #4caf50;
+  }
+  
+  .benefit-check {
+    font-size: 1.1rem;
+    color: #4caf50;
+    font-weight: bold;
+  }
+  
+  .benefit-text {
+    color: #2c3e50;
+  }
+  
+  .weight-loss-comparisons.empty {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  
+  .start-message {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin: 1.5rem 0 0;
+  }
+  
+  /* Özel Yiyecek Düzenleyici Stilleri */
+  .custom-food-editor {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .food-form {
+    margin-top: 1.5rem;
+  }
+  
+  .form-columns {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-left, .form-right {
+    flex: 1;
+  }
+  
+  .nutrition-values {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  
+  .nutrition-values h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #495057;
+  }
+  
+  .image-preview {
+    width: 100%;
+    height: 200px;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-style: italic;
+  }
+  
+  .help-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+  }
+  
+  .nutrition-summary {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  
+  .nutrition-summary h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #495057;
+  }
+  
+  .nutrition-chart {
+    margin-top: 1rem;
+  }
+  
+  .nutrition-bar {
+    height: 25px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .protein-bar, .carbs-bar, .fat-bar {
+    height: 100%;
+  }
+  
+  .protein-bar {
+    background-color: #4caf50;
+  }
+  
+  .carbs-bar {
+    background-color: #2196f3;
+  }
+  
+  .fat-bar {
+    background-color: #ff9800;
+  }
+  
+  .nutrition-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #495057;
+  }
+  
+  .legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+  
+  .legend-color.protein {
+    background-color: #4caf50;
+  }
+  
+  .legend-color.carbs {
+    background-color: #2196f3;
+  }
+  
+  .legend-color.fat {
+    background-color: #ff9800;
+  }
+  
+  .new-category-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .new-category-input input {
+    flex: 1;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  input.error {
+    border-color: #f44336;
+  }
+  
+  .error-message {
+    color: #f44336;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Sık Kullanılanlar ve Arama Geçmişi Stilleri */
+  .favorites-search-history {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.5rem;
+  }
+  
+  .tab {
+    padding: 0.75rem 1.25rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #495057;
+    position: relative;
+  }
+  
+  .tab.active {
+    color: #2196f3;
+  }
+  
+  .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #2196f3;
+  }
+  
+  .tab-content {
+    min-height: 300px;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #6c757d;
+  }
+  
+  .favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .favorite-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .favorite-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .favorite-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .favorite-info {
+    flex: 1;
+  }
+  
+  .favorite-info h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: #2c3e50;
+  }
+  
+  .favorite-category {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .favorite-nutrition {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  
+  .favorite-nutrition .calories {
+    font-weight: 600;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  
+  .favorite-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .search-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .search-term-item {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .search-term-item:hover {
+    background-color: #e9ecef;
+  }
+  
+  .search-term {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .term-text {
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .search-count {
+    background-color: #e3f2fd;
+    color: #2196f3;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .remove-term {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    line-height: 1;
+  }
+  
+  .custom-foods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .custom-food-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .custom-food-image {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #e9ecef;
+  }
+  
+  .custom-food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .custom-food-info h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+    color: #2c3e50;
+  }
+  
+  .custom-food-category {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .custom-food-nutrition {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .custom-food-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  /* Zorluk Modları ve Özel Günler Stilleri */
+  .challenge-modes-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .active-challenge {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .challenge-header h3 {
+    margin: 0;
+    color: #2c3e50;
+  }
+  
+  .challenge-info {
+    margin-bottom: 1.5rem;
+  }
+  
+  .challenge-description {
+    margin-top: 0;
+    color: #6c757d;
+    line-height: 1.5;
+  }
+  
+  .challenge-dates {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  
+  .date-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .date-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  
+  .date-value {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .challenge-progress {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .progress-percentage {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .progress-bar-container {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #2196f3;
+    border-radius: 5px;
+  }
+  
+  .challenge-details {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .challenge-details h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  
+  .challenge-details h5 {
+    margin: 1rem 0 0.5rem;
+    color: #495057;
+    font-size: 0.95rem;
+  }
+  
+  .challenge-rules ul, .restricted-foods ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  .challenge-rules ul li, .restricted-foods ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .macro-distribution {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .macro-item {
+    background-color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .macro-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+  }
+  
+  .macro-value {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .calorie-limit {
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+    border-left: 4px solid #2196f3;
+  }
+  
+  .calorie-limit h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+  
+  .calorie-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2196f3;
+    margin-bottom: 0.5rem;
+  }
+  
+  .calorie-value .unit {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-left: 0.25rem;
+  }
+  
+  .calorie-note {
+    margin: 0;
+    color: #6c757d;
+    font-style: italic;
+  }
+  
+  .available-challenges {
+    margin-top: 1rem;
+  }
+  
+  .intro-text {
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+    line-height: 1.5;
+  }
+  
+  .challenge-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .challenge-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+  }
+  
+  .challenge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .challenge-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .challenge-card-header h4 {
+    margin: 0;
+    color: #2c3e50;
+  }
+  
+  .duration {
+    background-color: #e3f2fd;
+    color: #2196f3;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .challenge-highlights {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .highlight-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background-color: white;
+    border-radius: 4px;
+  }
+  
+  .highlight-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .highlight-value {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .start-challenge-btn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .special-day-form {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+  
+  .days-timeline {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .timeline-item {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .timeline-item.today {
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    padding: 0.5rem;
+  }
+  
+  .timeline-date {
+    width: 50px;
+    height: 50px;
+    background-color: #2196f3;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 500;
+  }
+  
+  .timeline-date .day {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  
+  .timeline-date .month {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+  
+  .timeline-content {
+    flex: 1;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 4px solid #2196f3;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .plan-header h4 {
+    margin: 0;
+    color: #2c3e50;
+  }
+  
+  .calorie-limit {
+    background-color: #e3f2fd;
+    color: #2196f3;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  
+  .plan-note {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0.5rem 0;
+    font-style: italic;
+  }
+  
+  .plan-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+  
+  /* Geliştirilmiş Profil Sayfası Stilleri */
+  .enhanced-profile {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+  }
+  
+  .profile-detail {
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid #e9ecef;
+  }
+  
+  .profile-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.5rem;
+  }
+  
+  .nav-button {
+    padding: 0.75rem 1.25rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #495057;
+    position: relative;
+  }
+  
+  .nav-button.active {
+    color: #2196f3;
+  }
+  
+  .nav-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #2196f3;
+  }
+  
+  .profile-section {
+    min-height: 300px;
+  }
+  
+  .form-columns {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-column {
+    flex: 1;
+  }
+  
+  .info-value {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .calorie-info {
+    margin-top: 0.5rem;
+    background-color: #e3f2fd;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .info-label {
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .custom-foods-info {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #6c757d;
+  }
+  
+  /* Mobil Uyumluluk */
+  @media (max-width: 768px) {
+    .form-columns {
+      flex-direction: column;
+    }
+    
+    .form-row {
+      flex-direction: column;
+    }
+    
+    .calculator-results {
+      flex-direction: column;
+    }
+    
+    .upload-form {
+      flex-direction: column;
+    }
+    
+    .tabs {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.75rem;
+    }
+    
+    .tab {
+      white-space: nowrap;
+    }
+    
+    .profile-navigation {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.75rem;
+    }
+    
+    .nav-button {
+      white-space: nowrap;
+    }
+    
+    .comparison-photos {
+      flex-direction: column;
+    }
+  }

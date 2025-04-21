@@ -1,10 +1,11 @@
-// src/App.js
+// src/App.js (Güncellenmiş Versiyon)
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
-import MealPlanner from './components/MealPlanner';
+import ImprovedMealPlanner from './components/ImprovedMealPlanner';
 import WeightTracker from './components/WeightTracker';
+import BodyMeasurements from './components/BodyMeasurements';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import './App.css';
@@ -17,6 +18,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState('');
 
   useEffect(() => {
     // Kullanıcı oturumunu kontrol et
@@ -35,6 +37,33 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // URL değişikliklerini takip et
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname;
+      
+      if (path === '/' || path === '') {
+        setCurrentPage('dashboard');
+      } else if (path.includes('meals')) {
+        setCurrentPage('meals');
+      } else if (path.includes('weight')) {
+        setCurrentPage('weight');
+      } else if (path.includes('measurements')) {
+        setCurrentPage('measurements');
+      } else if (path.includes('profile')) {
+        setCurrentPage('profile');
+      } else if (path.includes('login')) {
+        setCurrentPage('login');
+      }
+    };
+
+    // Sayfa yüklendiğinde ve URL değiştiğinde kontrol et
+    handleLocationChange();
+    window.addEventListener('popstate', handleLocationChange);
+
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
   if (loading) {
     return <div className="loading">Yükleniyor...</div>;
   }
@@ -43,17 +72,48 @@ function App() {
     <Router>
       <div className="app">
         <header className="app-header">
-          <h1>Sağlıklı Yaşam Takip Uygulaması</h1>
+          <h1>Hızlı Kilo Takip & Beslenme Uygulaması</h1>
           {session ? (
             <nav>
-              <Link to="/">Ana Sayfa</Link>
-              <Link to="/meals">Beslenme Planı</Link>
-              <Link to="/weight">Kilo Takibi</Link>
-              <Link to="/profile">Profil</Link>
+              <Link 
+                to="/" 
+                className={currentPage === 'dashboard' ? 'active' : ''}
+              >
+                Ana Sayfa
+              </Link>
+              <Link 
+                to="/meals" 
+                className={currentPage === 'meals' ? 'active' : ''}
+              >
+                Beslenme Planı
+              </Link>
+              <Link 
+                to="/weight" 
+                className={currentPage === 'weight' ? 'active' : ''}
+              >
+                Kilo Takibi
+              </Link>
+              <Link 
+                to="/measurements" 
+                className={currentPage === 'measurements' ? 'active' : ''}
+              >
+                Vücut Ölçüleri
+              </Link>
+              <Link 
+                to="/profile" 
+                className={currentPage === 'profile' ? 'active' : ''}
+              >
+                Profil
+              </Link>
               <button onClick={() => supabase.auth.signOut()}>Çıkış</button>
             </nav>
           ) : (
-            <Link to="/login">Giriş</Link>
+            <Link 
+              to="/login" 
+              className={currentPage === 'login' ? 'active' : ''}
+            >
+              Giriş
+            </Link>
           )}
         </header>
 
@@ -65,11 +125,15 @@ function App() {
             />
             <Route 
               path="/meals" 
-              element={session ? <MealPlanner supabase={supabase} /> : <Login supabase={supabase} />} 
+              element={session ? <ImprovedMealPlanner supabase={supabase} /> : <Login supabase={supabase} />} 
             />
             <Route 
               path="/weight" 
               element={session ? <WeightTracker supabase={supabase} /> : <Login supabase={supabase} />} 
+            />
+            <Route 
+              path="/measurements" 
+              element={session ? <BodyMeasurements supabase={supabase} /> : <Login supabase={supabase} />} 
             />
             <Route 
               path="/profile" 
@@ -80,7 +144,7 @@ function App() {
         </main>
 
         <footer>
-          <p>&copy; 2025 Sağlıklı Yaşam Takip Uygulaması</p>
+          <p>&copy; 2025 Hızlı Kilo Takip & Beslenme Uygulaması</p>
         </footer>
       </div>
     </Router>

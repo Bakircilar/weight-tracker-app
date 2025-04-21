@@ -1,0 +1,107 @@
+/* src/components/BodyMeasurements.css */
+.body-measurements {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .measurement-stats {
+    margin-top: 1.5rem;
+  }
+  
+  .stat-card.success {
+    background-color: #e6f7e9;
+    border-left: 4px solid #27ae60;
+  }
+  
+  .stat-card.danger {
+    background-color: #fbe9e7;
+    border-left: 4px solid #e74c3c;
+  }
+  
+  .change-percent {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    color: #7f8c8d;
+  }
+  
+  .stat-card.success .change-percent {
+    color: #27ae60;
+  }
+  
+  .stat-card.danger .change-percent {
+    color: #e74c3c;
+  }
+  
+  .measurements-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .measure-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .measure-selector label {
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .measure-selector select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  .history-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .measurement-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* Yatay kaydırma için minimum genişlik */
+  }
+  
+  .measurement-table th, 
+  .measurement-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .measurement-table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  /* Mobil için düzenlemeler */
+  @media (max-width: 768px) {
+    .chart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .measurement-table {
+      font-size: 0.85rem;
+    }
+  }

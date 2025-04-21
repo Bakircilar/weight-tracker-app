@@ -1,0 +1,390 @@
+/* src/components/ImprovedMealPlanner.css */
+.improved-meal-planner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.planner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calorie-summary {
+  background-color: #3498db;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-label {
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.day-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.day-tab {
+  min-width: 100px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.day-tab.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.day-tab.today {
+  border-color: #27ae60;
+  border-width: 2px;
+}
+
+.day-tab.active.today {
+  background-color: #27ae60;
+  border-color: #27ae60;
+}
+
+.day-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.day-date {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.meal-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.meal-day-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.template-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.template-select {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.template-form {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
+}
+
+.template-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.template-input-group input {
+  flex: 1;
+}
+
+.template-list {
+  margin-top: 1.5rem;
+}
+
+.template-list h4 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.templates {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.template-item {
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.template-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.template-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.template-calories {
+  background-color: #f1f9f1;
+  color: #27ae60;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.meals-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.meal-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.meal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.meal-card.completed {
+  border: 2px solid #27ae60;
+}
+
+.meal-header {
+  background-color: #f8f9fa;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meal-header h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.meal-calories {
+  background-color: #3498db;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.meal-content {
+  padding: 1.25rem;
+}
+
+.meal-info {
+  margin-bottom: 1rem;
+}
+
+.meal-title {
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.05rem;
+}
+
+.meal-description {
+  color: #7f8c8d;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.meal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.25rem;
+  border-top: 1px solid #f5f5f5;
+  padding-top: 1.25rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.edit-foods-btn {
+  background-color: #3498db;
+}
+
+.empty-meal {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.no-meal {
+  color: #95a5a6;
+  margin-bottom: 1rem;
+}
+
+.add-meal-btn {
+  width: 100%;
+}
+
+.food-items-list {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.food-items-list h5 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.food-items-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.food-item-small {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 0.9rem;
+}
+
+.food-item-small:last-child {
+  border-bottom: none;
+}
+
+.food-name {
+  font-weight: 500;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.food-quantity {
+  background-color: #f0f0f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 0.75rem;
+  color: #7f8c8d;
+}
+
+.food-calories {
+  font-weight: 500;
+  color: #e67e22;
+}
+
+/* Checkbox stilini güncelle */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Mobil için düzenlemeler */
+@media (max-width: 768px) {
+  .planner-header, 
+  .meal-day-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .week-navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .template-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .day-tabs {
+    padding-bottom: 0.75rem;
+  }
+  
+  .day-tab {
+    min-width: 80px;
+    padding: 0.5rem;
+  }
+  
+  .meals-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .meal-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .action-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
